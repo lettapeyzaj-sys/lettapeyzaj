@@ -105,6 +105,20 @@ body {
     }
 
 }
+/* Logo Boyut Ayarları */
+.header .logo {
+    height: 40px; /* Logonun yüksekliğini ayarlayın, 40px iyi bir başlangıçtır */
+    width: auto; /* Yüksekliğe orantılı genişlik */
+    vertical-align: middle; /* Logoyu menü ile aynı hizaya getirir */
+}
+
+/* Gerekirse, mobil görünümde küçültme */
+@media (max-width: 768px) {
+    .header .logo {
+        height: 30px; /* Mobilde biraz daha küçük görünebilir */
+}
+
+
 
 
 
