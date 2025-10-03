@@ -14,7 +14,7 @@ body {
 
 /* Başlık ve Menü */
 .header {
-    background-color: #064709;
+    background-color: #f6f6f6;
     border-bottom: 2px solid #5cb85c; /* Peyzajı çağrıştıran yeşil */
 }
 .header .container {
@@ -94,4 +94,5 @@ body {
     }
 
 }
+
 
