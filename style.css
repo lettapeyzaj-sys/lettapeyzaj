@@ -34,6 +34,18 @@ body {
     text-align: center;
     padding: 100px 0;
 }
+/* Ana Görsel / Hero - İçerik Kutusunun Şeffaf Arka Planı */
+.hero-content-box {
+    /* Şeffaf Beyaz Arka Plan: rgba(kırmızı, yeşil, mavi, şeffaflık) */
+    background-color: rgba(255, 255, 255, 0.75); /* %75 şeffaf beyaz */
+    
+    /* İçerikle kutu arasındaki boşluk */
+    padding: 20px 30px; 
+    
+    /* Metnin kenarlara yaslanmaması için kutuyu ortalama */
+    display: inline-block; /* Sadece içeriği kadar yer kaplaması için */
+    border-radius: 8px; /* Hafif yuvarlatılmış köşeler */
+}
 .hero h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
@@ -93,6 +105,7 @@ body {
     }
 
 }
+
 
 
 
