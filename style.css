@@ -145,7 +145,42 @@ body {
         height: auto !important; /* Yüksekliği otomatik ayarlar */
     }
 }
-
+/* Blog Listesi ve Kart Stilleri */
+.blog-list {
+    margin-top: 20px;
+}
+.article-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+.article-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.article-title a {
+    color: #333; /* Başlık rengi */
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.article-title a:hover {
+    color: #5cb85c; /* Vurgu renginiz */
+    text-decoration: underline;
+}
+.article-excerpt {
+    color: #666;
+    margin: 10px 0;
+}
+.read-more {
+    color: #5cb85c;
+    text-decoration: none;
+    font-weight: bold;
+}
+.read-more:hover {
+    text-decoration: underline;
+}
 
 
 
