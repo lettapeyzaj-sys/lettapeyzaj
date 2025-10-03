@@ -117,6 +117,34 @@ body {
     .header .logo {
         height: 200px; /* Mobilde biraz daha küçük görünebilir */
 }
+/* Instagram Akışını Ortalamak için CSS */
+.centered-widget {
+    /* Yatay ortalama için standart teknik */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Genellikle iframe'ler "display: block" olarak ayarlanmalıdır */
+    display: block; 
+    
+    /* Widget'ın maksimum genişliğini belirler */
+    max-width: 960px; /* SnapWidget'ın genişliği ile eşleşir */
+    padding: 20px 0;
+}
+
+/* Sayfa başlığını ortalar */
+.instagram-feed h3 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+/* MOBİL UYUMLULUK: Mobilde tüm genişliği kullanmalı */
+@media (max-width: 960px) {
+    /* Bu, widget'ın ekran küçüldükçe taşmasını engeller */
+    .snapwidget-widget {
+        width: 100% !important; /* Widget'ı tam genişlik yapar */
+        height: auto !important; /* Yüksekliği otomatik ayarlar */
+    }
+}
 
 
 
