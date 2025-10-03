@@ -31,7 +31,7 @@ body {
 /* Ana Görsel / Hero */
 .hero {
     background: url('peyzaj_gorseli.jpg') center/cover no-repeat;
-    color: white;
+    color: #064709;
     text-align: center;
     padding: 100px 0;
 }
@@ -94,3 +94,4 @@ body {
     }
 
 }
+
