@@ -24,28 +24,208 @@
         </div>
     </header>
 
-   <section class="hero">
-    <div class="container">
-        <div class="hero-content-box">
-            <h2>Hayalinizdeki Yaşam Alanlarını Tasarlıyoruz.</h2>
-            <a href="#iletisim" class="button">İletişime Geç</a>
-        </div>
-        </div>
+
+<!-- ---------- HERO SLIDER (tam sürüm, tek dosyalık) ---------- -->
+<section class="hero-slider" aria-label="Ana görsel ve duyuru">
+  <div class="slides">
+    <!-- iki layer (A ve B) ile crossfade yapıyoruz -->
+    <div class="slide visible" aria-hidden="false">
+      <img src="images/slide1.jpg" alt="Peyzaj örneği 1">
+      <div class="caption" role="status" aria-live="polite">Doğayla uyumlu peyzaj çözümleri</div>
+    </div>
+
+    <div class="slide" aria-hidden="true">
+      <img src="" alt="">
+      <div class="caption"></div>
+    </div>
+  </div>
+
+  <!-- opsiyonel kontrol butonları -->
+<div class="slider-controls" aria-hidden="true">
+    <button class="prev" aria-label="Önceki">‹</button>
+    <button class="next" aria-label="Sonraki">›</button>
+  </div>
+
+    <div class="slider-action-wrapper">
+    <a href="#iletisim" class="button contact-button">İletişime Geç</a>
+  </div>
 </section>
-    <section id="hizmetler" class="services">
+
+<style>
+  .hero-slider{
+    position:relative;
+    width:100%;
+    height:70vh;
+    min-height:320px;
+    overflow:hidden;
+  }
+  .slides{ position:relative; width:100%; height:100%; }
+  .slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .6s ease;
+    opacity:0;
+  }
+  .slide.visible{ opacity:1; z-index:2; }
+  .slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .caption{
+    position:absolute;
+    left:4%;
+    bottom:16%;
+    color:#fff;
+    padding:12px 18px;
+    background:rgba(0,0,0,0.45);
+    border-radius:8px;
+    font-size:clamp(16px, 3vw, 36px);
+    max-width:90%;
+    line-height:1.2;
+  }
+  .slider-controls{
+    position:absolute;
+    right:12px;
+    bottom:12px;
+    z-index:3;
+  }
+  .slider-controls button{
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    border:none;
+    padding:8px 10px;
+    margin-left:6px;
+    border-radius:6px;
+    cursor:pointer;
+  }
+  .slider-controls button:focus{ outline:2px solid #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide{ transition:none; }
+  }
+</style>
+
+<script>
+(function(){
+  // Değişecek resim ve yazılar — kendi görsellerinle değiştir
+  const slidesData = [
+    { img: 'images/slide1.jpg', alt: 'Peyzaj örneği 1', text: 'Hayalinizdeki Yaşam Alanlarını Tasarlıyoruz.' },
+    { img: 'images/slide2.jpg', alt: 'Peyzaj örneği 1', text: 'Doğayla uyumlu peyzaj çözümleri' },
+    { img: 'images/slide3.jpg', alt: 'Peyzaj örneği 2', text: 'Modern bahçe tasarımları' },
+    { img: 'images/slide4.jpg', alt: 'Peyzaj örneği 3', text: 'Bakımlı ve estetik alanlar' }
+  ];
+
+  const INTERVAL_MS = 3000; // 3 saniye
+  const hero = document.querySelector('.hero-slider');
+  const [layerA, layerB] = hero.querySelectorAll('.slide');
+  let showingA = true;
+  let idx = 0;
+  let timer = null;
+
+  // Önbelleğe al (preload)
+  slidesData.forEach(s => { const i = new Image(); i.src = s.img; });
+
+  function setContent(layer, data){
+    const img = layer.querySelector('img');
+    img.src = data.img;
+    img.alt = data.alt || '';
+    layer.querySelector('.caption').textContent = data.text || '';
+  }
+
+  // Başlangıç: ilk slaytı ayarla
+  setContent(layerA, slidesData[0]);
+  layerA.classList.add('visible');
+
+  function showSlide(newIndex){
+    const incoming = showingA ? layerB : layerA;
+    const outgoing = showingA ? layerA : layerB;
+
+    setContent(incoming, slidesData[newIndex]);
+    incoming.classList.add('visible');
+    incoming.setAttribute('aria-hidden', 'false');
+    outgoing.classList.remove('visible');
+    outgoing.setAttribute('aria-hidden', 'true');
+
+    showingA = !showingA;
+  }
+
+  function startTimer(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    stopTimer();
+    timer = setInterval(()=>{
+      idx = (idx + 1) % slidesData.length;
+      showSlide(idx);
+    }, INTERVAL_MS);
+  }
+  function stopTimer(){ if(timer){ clearInterval(timer); timer = null; } }
+
+  // Pause on hover / touch
+  hero.addEventListener('mouseenter', stopTimer);
+  hero.addEventListener('mouseleave', startTimer);
+  hero.addEventListener('touchstart', stopTimer, {passive:true});
+  hero.addEventListener('touchend', startTimer, {passive:true});
+
+  // Opsiyonel prev/next düğmeleri
+  const prev = hero.querySelector('.prev');
+  const next = hero.querySelector('.next');
+  if(prev && next){
+    prev.addEventListener('click', ()=>{
+      stopTimer();
+      idx = (idx - 1 + slidesData.length) % slidesData.length;
+      showSlide(idx);
+      startTimer();
+    });
+    next.addEventListener('click', ()=>{
+      stopTimer();
+      idx = (idx + 1) % slidesData.length;
+      showSlide(idx);
+      startTimer();
+    });
+  }
+
+  // Başlat
+  startTimer();
+})();
+</script>
+<!-- ---------- HERO SLIDER END ---------- -->
+
+</section>
+   <section id="hizmetler" class="services">
         <div class="container">
             <h3>Peyzaj Alanları</h3>
             <div class="service-list">
-                <div class="service-item">
-                    <h4>Kurumsal Projeler</h4>
-                    <p>Ofis binaları, fabrikalar ve ticari merkezler için profesyonel çözümler.</p>
-                </div>
-                <div class="service-item">
-                    <h4>Konut Peyzajı</h4>
-                    <p>Villalar, daireler ve toplu konutlar için özel bahçe tasarımları.</p>
-                </div>
-                </div>
+                
+
+<a href="kurumsal.html" class="service-link"> 
+    <div class="service-item">
+        <img src="temsilci-kurumsal.jpg" alt="Kurumsal Peyzaj Uygulamaları" class="service-img">
+        
+        <div class="service-text">
+            <h4>Kurumsal Projeler</h4>
+            <p>Ofis binaları, fabrikalar ve ticari merkezler için profesyonel çözümler.</p>
         </div>
+    </div>
+</a>
+                
+
+<a href="konut.html" class="service-link"> 
+    <div class="service-item">
+        <img src="temsilci-konut.jpg" alt="Konut Peyzaj Uygulamaları" class="service-img">
+        
+        <div class="service-text">
+            <h4>Konut Projeleri</h4>
+            <p>Villalar, daireler ve toplu konutlar için özel bahçe tasarımları.</p>
+        </div>
+    </div>
+</a>
+                
+            </div>
+   
     </section>
 <section class="instagram-feed">
     <div class="container">
@@ -69,7 +249,7 @@
         <div class="container">
             <p>
     Telefon: <a href="tel:+905357671864"style="color: white; text-decoration: none;">0535 767 18 64</a> 
-    | E-posta: <a href="mailto:lettapayzaj@gmail.com"style="color: white; text-decoration: none;">lettapayzaj@gmail.com</a>
+    | E-posta: <a href="mailto:lettapeyzaj@gmail.com"style="color: white; text-decoration: none;">lettapeyzaj@gmail.com</a>
 </p>
          
         <p>
@@ -77,7 +257,7 @@
                target="_blank" 
                rel="noopener noreferrer" 
                style="color: white; text-decoration: none;">
-                Instagram @lettapayzaj
+                Instagram @lettapeyzaj
             </a>
         </p>
         <p style="font-size: 0.8em; margin-top: 10px;">&copy; 2025 Letta Peyzaj. Tüm Hakları Saklıdır.</p>

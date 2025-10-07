@@ -27,39 +27,14 @@ body {
     color: #333;
     margin-left: 20px;
 }
-/* Ana Görsel / Hero */
-.hero {
-    background: url('peyzaj_gorseli.jpg') center/cover no-repeat;
-    color: #065b23;
-    text-align: center;
-    padding: 100px 0;
-}
-/* Ana Görsel / Hero - İçerik Kutusunun Şeffaf Arka Planı */
-.hero-content-box {
-    /* Şeffaf Beyaz Arka Plan: rgba(kırmızı, yeşil, mavi, şeffaflık) */
-    background-color: rgba(255, 255, 255, 0.75); /* %75 şeffaf beyaz */
-    
-    /* İçerikle kutu arasındaki boşluk */
-    padding: 20px 30px; 
-    
-    /* Metnin kenarlara yaslanmaması için kutuyu ortalama */
-    display: inline-block; /* Sadece içeriği kadar yer kaplaması için */
-    border-radius: 8px; /* Hafif yuvarlatılmış köşeler */
-}
-.hero h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #5cb85c;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+/* Logo Boyut Ayarları */
+.header .logo {
+    height: 150px; /* Mantıklı bir logo boyutu (Siz 200px yazmışsınız, fazla olabilir) */
+    width: auto;
+    vertical-align: middle;
 }
 
-/* Hizmetler ve Blog */
+/* Hizmetler, Blog ve Footer */
 .services, .blog-preview {
     padding: 40px 0;
     text-align: center;
@@ -70,12 +45,26 @@ body {
     flex-wrap: wrap;
     margin-top: 20px;
 }
+/* Service Item (Genel) */
 .service-item {
-    width: 45%; /* Başlangıçta PC için yarı yarıya */
+    width: 45%;
     margin: 10px 0;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
+}
+/* Görsel Stilleri */
+.service-img {
+    width: 100%;       
+    height: 220px;     
+    object-fit: cover; 
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+/* Metin Stilleri */
+.service-text {
+    padding: 0 10px;
+    text-align: center;
 }
 
 /* Alt Bilgi (Footer) */
@@ -87,7 +76,122 @@ body {
     font-size: 0.9em;
 }
 
-/* MOBİL UYUMLULUK (Responsive Tasarım) */
+/* --- HERO SLIDER CSS'LERİ --- */
+
+.hero-slider{
+    position: relative; /* Buton konumlandırma için kritik */
+    width: 100%;
+    height: 70vh;
+    min-height: 320px;
+    overflow: hidden;
+}
+.slides{ position:relative; width:100%; height:100%; }
+.slide{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .6s ease;
+    opacity: 0;
+}
+.slide.visible{ opacity:1; z-index:2; }
+.slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.caption{
+    position: absolute;
+    left: 4%;
+    bottom: 16%;
+    color: #fff;
+    padding: 12px 18px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 8px;
+    font-size: clamp(16px, 3vw, 36px);
+    max-width: 90%;
+    line-height: 1.2;
+    z-index: 3; /* Başlık/metin katmanı */
+}
+
+/* Slider Kontrol Butonları ve İletişim Butonu */
+
+.slider-controls {
+    position: absolute;
+    right: auto; 
+    left: 12px;  /* Sol alta hizalandı */
+    bottom: 12px;
+    z-index: 3; /* Oklar ve sayfa numaralarının katmanı */
+}
+.slider-controls button{
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    border:none;
+    padding:8px 10px;
+    margin-left:6px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* İLETİŞİM BUTONU (Butonunuzun Görünmesini Sağlayan KOD) */
+.slider-action-wrapper {
+    position: absolute; /* Mutlak Konumlandırma */
+    right: 50px;       /* Sağdan boşluk */
+    bottom: 50px;      /* Alttan boşluk */
+    z-index: 4;        /* EN ÜST KATMAN */
+}
+.contact-button {
+    background-color: #5cb85c;
+    color: #fff;
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+    display: inline-block;
+}
+.contact-button:hover {
+    background-color: #4cae4c;
+}
+
+
+/* --- GALERİ (KURUMSAL PROJELER) CSS'LERİ --- */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px;
+    margin-top: 30px;
+}
+.gallery-item {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+.gallery-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+figcaption {
+    padding: 10px 5px;
+    font-weight: bold;
+    font-size: 0.95em;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+
+/* --- MOBİL UYUMLULUK (Responsive Tasarım) --- */
+
 @media (max-width: 768px) {
     /* Menüyü yığınla */
     .header .container {
@@ -103,98 +207,17 @@ body {
         width: 100%;
         margin-bottom: 20px;
     }
-
-}
-/* Logo Boyut Ayarları */
-.header .logo {
-    height: 200px; /* Logonun yüksekliğini ayarlayın, 40px iyi bir başlangıçtır */
-    width: auto; /* Yüksekliğe orantılı genişlik */
-    vertical-align: middle; /* Logoyu menü ile aynı hizaya getirir */
-}
-
-/* Gerekirse, mobil görünümde küçültme */
-@media (max-width: 768px) {
     .header .logo {
-        height: 200px; /* Mobilde biraz daha küçük görünebilir */
-}
-/* Instagram Akışını Ortalamak için CSS */
-.centered-widget {
-    /* Yatay ortalama için standart teknik */
-    margin-left: auto;
-    margin-right: auto;
+        height: 150px; /* Mobilde daha küçük */
+    }
     
-    /* Genellikle iframe'ler "display: block" olarak ayarlanmalıdır */
-    display: block; 
-    
-    /* Widget'ın maksimum genişliğini belirler */
-    max-width: 960px; /* SnapWidget'ın genişliği ile eşleşir */
-    padding: 20px 0;
-}
-
-/* Sayfa başlığını ortalar */
-.instagram-feed h3 {
-    text-align: center;
-    padding-top: 20px;
-}
-
-/* MOBİL UYUMLULUK: Mobilde tüm genişliği kullanmalı */
-@media (max-width: 960px) {
-    /* Bu, widget'ın ekran küçüldükçe taşmasını engeller */
-    .snapwidget-widget {
-        width: 100% !important; /* Widget'ı tam genişlik yapar */
-        height: auto !important; /* Yüksekliği otomatik ayarlar */
+    /* Butonu mobilde küçültme ve kenarlara yaklaştırma */
+    .slider-action-wrapper {
+        right: 15px;       /* Daha az boşluk */
+        bottom: 15px;      /* Daha az boşluk */
+    }
+    .contact-button {
+        font-size: 0.9em;
+        padding: 10px 20px;
     }
 }
-/* Blog Listesi ve Kart Stilleri */
-.blog-list {
-    margin-top: 20px;
-}
-.article-card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 8px;
-    transition: box-shadow 0.3s ease;
-}
-.article-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.article-title a {
-    color: #333; /* Başlık rengi */
-    text-decoration: none;
-    font-size: 1.5em;
-    font-weight: bold;
-}
-.article-title a:hover {
-    color: #5cb85c; /* Vurgu renginiz */
-    text-decoration: underline;
-}
-.article-excerpt {
-    color: #666;
-    margin: 10px 0;
-}
-.read-more {
-    color: #5cb85c;
-    text-decoration: none;
-    font-weight: bold;
-}
-.read-more:hover {
-    text-decoration: underline;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
